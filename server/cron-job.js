@@ -36,10 +36,13 @@ Meteor.startup(function () {
 
 function sendEmail() {
 	var randomEmail = _.sample(Emails.find().fetch());
-	Email.send({
-	  from: "plsreplytous@ridemarbel.com",
-	  to: "hello@ridemarbel.com",
-	  subject: randomEmail.subject,
-	  text: randomEmail.message
+	var emails = ['hello@ridemarbel.com', 'service@ridemarbel.com', 'matt@ridemarbel.com'];
+	_.each(emails, function (email) {
+		Email.send({
+		  from: "plsreplytous@ridemarbel.com",
+		  to: email,
+		  subject: randomEmail.subject,
+		  text: randomEmail.message
+		});
 	});
 }
