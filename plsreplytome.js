@@ -1,23 +1,25 @@
 if (Meteor.isClient) {
-  // counter starts at 0
-  Session.setDefault('counter', 0);
-
-  Template.hello.helpers({
-    counter: function () {
-      return Session.get('counter');
+  Template.main.created = function () {
+    this.subscribe('allUserCount');
+    this.subscribe('allMessages');
+  };
+  Template.main.helpers({
+    count: function () {
+      var count = Counts.findOne();
+      return count && count.totalUsers || 0;
     }
   });
-
-  Template.hello.events({
-    'click button': function () {
-      // increment the counter when button is clicked
-      Session.set('counter', Session.get('counter') + 1);
-    }
-  });
-}
-
-if (Meteor.isServer) {
-  Meteor.startup(function () {
-    // code to run on server at startup
-  });
+ Template.form.events({
+   'submit #emailform': function (evt, template) {
+      evt.preventDefault();
+      console.log(evt.target.subject.value);
+      console.log(evt.target.message.value);
+      Meteor.call('insertNewMessage', Meteor.userId(), evt.target.subject.value, evt.target.message.value);
+   }
+ });
+ Template.messages.helpers({
+   messages: function () {
+     return Emails.find();
+   }
+ });
 }

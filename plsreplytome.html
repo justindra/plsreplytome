@@ -3,12 +3,46 @@
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
-
-  {{> hello}}
+  {{> main}}
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="main">
+  <h1>Welcome to plsreplytome</h1>
+
+  <p>A site that is built to send an email to <a href="http://ridemarbel.com" target="_blank">Marbel</a>, {{count}} times a week.</p>
+
+  <p>This is because they sometimes forget to reply to us and hence we need to send them a reminder.</p>
+
+  {{#unless currentUser}}
+  <h2>Sign in using Facebook to increase the frequency of email being sent to <a href="mailto:hello@ridemarbel.com">hello@ridemarbel.com</a></h2>
+  {{/unless}}
+
+  {{> loginButtons}}
+  {{#if currentUser}}
+
+  <h2>If you would like add a new message, please add one below. One of these messages will be selected at random when sending the email to <a href="mailto:hello@ridemarbel.com">hello@ridemarbel.com</a>.</h2>
+  
+  {{> form}}
+  {{/if}}
+
+  <h2>These are the emails that will be selected as random to be sent to Marbel. Hopefully we will get our boards, or at least they start replying to the community.</h2>
+
+  {{> messages}}
+</template>
+
+<template name="form">
+  <form id="emailform">
+    <label for="subject">Subject:</label>
+    <input id="subject" type="text" name="subject"> <br>
+    <label for="Message">Message:</label>
+    <textarea id="message" name="message"></textarea>
+    <input type="submit">
+  </form>
+</template>
+
+<template name="messages">
+{{#each messages}}
+  <h1>{{subject}}</h1>
+  <h4>{{message}}</h4>
+{{/each}}
 </template>
