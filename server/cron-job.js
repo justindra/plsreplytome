@@ -30,6 +30,7 @@ Meteor.methods({
 });
 
 Meteor.startup(function () {
+	Meteor.call('setCronJob');
 	SyncedCron.start();
 });
 

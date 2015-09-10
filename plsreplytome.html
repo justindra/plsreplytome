@@ -1,5 +1,5 @@
 <head>
-  <title>plsreplytome</title>
+  <title>plsreplytous</title>
 </head>
 
 <body>
@@ -7,7 +7,7 @@
 </body>
 
 <template name="main">
-  <h1>Welcome to plsreplytome</h1>
+  <h1>Welcome to plsreplytous</h1>
 
   <p>A site that is built to send an email to <a href="http://ridemarbel.com" target="_blank">Marbel</a>, {{count}} times a week.</p>
 
@@ -15,6 +15,8 @@
 
   {{#unless currentUser}}
   <h2>Sign in using Facebook to increase the frequency of email being sent to <a href="mailto:hello@ridemarbel.com">hello@ridemarbel.com</a></h2>
+
+  <p>The frequency is basically number of people signed in in a week. So if there is 1 person signed up, it does it once a week, if there's 2 it sends it twice a week. And so on.</p>
   {{/unless}}
 
   {{> loginButtons}}
@@ -28,6 +30,7 @@
   <h2>These are the emails that will be selected as random to be sent to Marbel. Hopefully we will get our boards, or at least they start replying to the community.</h2>
 
   {{> messages}}
+
 </template>
 
 <template name="form">
